@@ -13,16 +13,16 @@ const farh = document.querySelector('.farhenheit');
 // Get weather data
 
 async function getData() {
-  const response = await fetch('api.openweathermap.org/data/2.5/weather?q=Kampala&appid=1c954fe59dca8548d2eb13416b4f9da3', 
+  const response = await fetch(`api.openweathermap.org/data/2.5/weather?q=London&appid=49257f6591cfc3ed8daf0b5970d519cb`, 
     { mode: "cors" }
   );
 
   const data = await response.json();
 
-  console.log(data);
+  return data;
 }
 
 root.appendChild(userInput());
 root.appendChild(weatherCard());
 
-getData();
+console.log(getData());
