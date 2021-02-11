@@ -1,6 +1,6 @@
 const userInput = () => {
   const formContainer = document.createElement('div');
-  formContainer.classList.add('flex', 'justify-around', 'pt-16');
+  formContainer.classList.add('flex', 'justify-around', 'pt-8');
 
   const head = document.createElement('div');
   head.classList.add('text-white', 'text-4xl');
@@ -14,8 +14,16 @@ const userInput = () => {
   cityInput.placeholder = 'Enter City';
 
   const unit = document.createElement('div');
-  unit.classList.add('text-white', 'text-3xl', 'bg-purple-400', 'px-2', 'rounded-lg');
-  unit.innerText = 'C/F'
+  unit.classList.add('unit', 'text-white', 'text-3xl', 'bg-purple-400', 'px-2', 'rounded-lg', 'flex');
+  const cel = document.createElement('button');
+  cel.classList.add('bg-purple-400', 'border-r', 'border-gray-800', 'px-2', 'celcius');
+  cel.innerText = 'C';
+  const farh = document.createElement('button');
+  farh.classList.add('bg-purple-400', 'px-2', 'farhenheit');
+  farh.innerText = 'F';
+
+  unit.appendChild(cel);
+  unit.appendChild(farh);
 
   form.appendChild(cityInput);
   formContainer.appendChild(head);
@@ -29,21 +37,20 @@ const weatherCard = () => {
   const card = document.createElement('div');
   card.classList.add('pt-6');
 
-
   const cardContainer = document.createElement('div');
-  cardContainer.classList.add('border', 'border-red-400', 'rounded-lg', 'p-4', 'w-48');
+  cardContainer.classList.add('border', 'border-red-400', 'rounded-lg', 'p-4', 'w-min');
 
   const cardCity = document.createElement('h2');
-  cardCity.classList.add('text-2xl', 'text-blue-900');
+  cardCity.classList.add('text-4xl', 'text-blue-900');
   cardCity.innerText = `Kampala`;
 
   const cardTemp = document.createElement('h2');
   cardTemp.classList.add();
   cardTemp.innerHTML = `<h2>Temp:   21&#176;C</h2>`;
 
-  const cardUnit = document.createElement('h2');
-  cardUnit.classList.add();
-  cardUnit.innerHTML = `<h2>Moisture:  16 &#176;</h2>`;
+  const cardIcon = document.createElement('h2');
+  cardIcon.classList.add();
+  cardIcon.innerHTML = `<img src=''>`;
 
   const cardCloud = document.createElement('h2');
   cardCloud.classList.add();
@@ -51,7 +58,7 @@ const weatherCard = () => {
 
   cardContainer.appendChild(cardCity);
   cardContainer.appendChild(cardTemp);
-  cardContainer.appendChild(cardUnit);
+  cardContainer.appendChild(cardIcon);
   cardContainer.appendChild(cardCloud);
   card.appendChild(cardContainer);
 
