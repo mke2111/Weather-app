@@ -13,7 +13,7 @@ const farh = document.querySelector('.farhenheit');
 // Get weather data
 
 async function getData() {
-  const response = await fetch(`api.openweathermap.org/data/2.5/weather?q=London&appid=49257f6591cfc3ed8daf0b5970d519cb`, 
+  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=London&appid=49257f6591cfc3ed8daf0b5970d519cb`, 
     { mode: "cors" }
   );
 
@@ -25,4 +25,5 @@ async function getData() {
 root.appendChild(userInput());
 root.appendChild(weatherCard());
 
-console.log(getData());
+getData()
+      .then( weat => console.log(weat));
