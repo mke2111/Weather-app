@@ -60,7 +60,7 @@ const weatherCard = data => {
 
   const cardCloud = document.createElement('h2');
   cardCloud.classList.add();
-  cardCloud.innerText = `Rainy`;
+  cardCloud.innerText = `${data.weather[0]['description']}`;
 
   cardContainer.appendChild(cardCity);
   cardContainer.appendChild(cardTemp);
