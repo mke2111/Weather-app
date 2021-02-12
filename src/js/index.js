@@ -1,4 +1,4 @@
-import { userInput, weatherCard } from './content'
+import userInput from './content'
 
 const root = document.getElementById('root');
 root.classList.add('bg-gradient-to-r', 'to-red-500', 'via-pink-500', 'from-purple-400', 'h-screen', 'w-full', 'opacity-95', 'z-10');
@@ -10,6 +10,13 @@ const cityInput = document.querySelector('input');
 const cel = document.querySelector('.celcius');
 const farh = document.querySelector('.farhenheit');
 
+// display
+
+const cardCity = document.querySelector('.card-city');
+
+root.appendChild(userInput());
+// root.appendChild(weatherCard());
+
 // Get weather data
 
 async function getData() {
@@ -19,19 +26,56 @@ async function getData() {
 
   const data = await response.json();
 
-  weatherCard(data);
+  // weatherCard(data);
+  console.log(data);
+  weatherCard(data)
 }
 
-root.appendChild(userInput());
-root.appendChild(weatherCard());
+
+
+const weatherCard = data => {
+  let temperature = Math.round(
+    (
+      ((data.main.temp - 273.15) * 9) / (5)) + 32
+    );
+  
+  const card = document.createElement('div');
+  card.classList.add('pt-6');
+
+  const cardContainer = document.createElement('div');
+  cardContainer.classList.add('border', 'border-red-400', 'rounded-lg', 'p-4', 'w-min');
+
+  const cardCity = document.createElement('h2');
+  cardCity.classList.add('text-4xl', 'text-blue-900', 'card-city');
+  cardCity.innerText = `${data.name}`;
+  
+  
+  const cardTemp = document.createElement('h2');
+  cardTemp.classList.add();
+  cardTemp.innerHTML = `<h2>Temp: ${temperature.toString()}&#176;C</h2>`;
+
+  const cardIcon = document.createElement('h2');
+  cardIcon.classList.add();
+  cardIcon.innerHTML = `<img src=''>`;
+
+  const cardCloud = document.createElement('h2');
+  cardCloud.classList.add();
+  cardCloud.innerText = `Rainy`;
+
+  cardContainer.appendChild(cardCity);
+  cardContainer.appendChild(cardTemp);
+  cardContainer.appendChild(cardIcon);
+  cardContainer.appendChild(cardCloud);
+  card.appendChild(cardContainer);
+  root.appendChild(card);
+
+  // return card;
+
+}
+
+
 
 getData()
-      .then( weat => {
-        return weat;
-      })
-      .then( hot => {
-        weatherCard(data);
-      })
-      .catch( error => {
-        console.log(error);
-      });
+  .then(dat => {
+    console.log(dat);
+  })

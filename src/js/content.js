@@ -33,37 +33,39 @@ const userInput = () => {
   return formContainer;
 }
 
-const weatherCard = data => {
-  const card = document.createElement('div');
-  card.classList.add('pt-6');
+// const weatherCard = data => {
+//   const card = document.createElement('div');
+//   card.classList.add('pt-6');
 
-  const cardContainer = document.createElement('div');
-  cardContainer.classList.add('border', 'border-red-400', 'rounded-lg', 'p-4', 'w-min');
+//   const cardContainer = document.createElement('div');
+//   cardContainer.classList.add('border', 'border-red-400', 'rounded-lg', 'p-4', 'w-min');
 
-  const cardCity = document.createElement('h2');
-  cardCity.classList.add('text-4xl', 'text-blue-900');
-  cardCity.innerText = `${data.name}`;
+//   const cardCity = document.createElement('h2');
+//   cardCity.classList.add('text-4xl', 'text-blue-900', 'card-city');
+//   // if (data === undefined) {
+//   //   cardCity.innerText = `${data.name}`;
+//   // }
+  
+//   const cardTemp = document.createElement('h2');
+//   cardTemp.classList.add();
+//   cardTemp.innerHTML = `<h2>Temp:   21&#176;C</h2>`;
 
-  const cardTemp = document.createElement('h2');
-  cardTemp.classList.add();
-  cardTemp.innerHTML = `<h2>Temp:   21&#176;C</h2>`;
+//   const cardIcon = document.createElement('h2');
+//   cardIcon.classList.add();
+//   cardIcon.innerHTML = `<img src=''>`;
 
-  const cardIcon = document.createElement('h2');
-  cardIcon.classList.add();
-  cardIcon.innerHTML = `<img src=''>`;
+//   const cardCloud = document.createElement('h2');
+//   cardCloud.classList.add();
+//   cardCloud.innerText = `Rainy`;
 
-  const cardCloud = document.createElement('h2');
-  cardCloud.classList.add();
-  cardCloud.innerText = `Rainy`;
+//   cardContainer.appendChild(cardCity);
+//   cardContainer.appendChild(cardTemp);
+//   cardContainer.appendChild(cardIcon);
+//   cardContainer.appendChild(cardCloud);
+//   card.appendChild(cardContainer);
 
-  cardContainer.appendChild(cardCity);
-  cardContainer.appendChild(cardTemp);
-  cardContainer.appendChild(cardIcon);
-  cardContainer.appendChild(cardCloud);
-  card.appendChild(cardContainer);
+//   return card;
 
-  return card;
+// }
 
-}
-
-export { userInput, weatherCard } ;
+export default userInput ;
