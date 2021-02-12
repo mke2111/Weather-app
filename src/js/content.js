@@ -33,7 +33,7 @@ const userInput = () => {
   return formContainer;
 }
 
-const weatherCard = () => {
+const weatherCard = data => {
   const card = document.createElement('div');
   card.classList.add('pt-6');
 
@@ -42,7 +42,7 @@ const weatherCard = () => {
 
   const cardCity = document.createElement('h2');
   cardCity.classList.add('text-4xl', 'text-blue-900');
-  cardCity.innerText = `Kampala`;
+  cardCity.innerText = `${data.name}`;
 
   const cardTemp = document.createElement('h2');
   cardTemp.classList.add();

@@ -19,11 +19,19 @@ async function getData() {
 
   const data = await response.json();
 
-  return data;
+  weatherCard(data);
 }
 
 root.appendChild(userInput());
 root.appendChild(weatherCard());
 
 getData()
-      .then( weat => console.log(weat));
+      .then( weat => {
+        return weat;
+      })
+      .then( hot => {
+        weatherCard(data);
+      })
+      .catch( error => {
+        console.log(error);
+      });
