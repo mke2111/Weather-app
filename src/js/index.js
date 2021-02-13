@@ -3,6 +3,8 @@ import userInput from './content'
 const root = document.getElementById('root');
 root.classList.add('bg-gradient-to-r', 'to-red-500', 'via-pink-500', 'from-purple-400', 'h-screen', 'w-full', 'opacity-95', 'z-10');
 
+root.appendChild(userInput());
+
 // user input section
 
 const form = document.querySelector('form');
@@ -10,17 +12,18 @@ const cityInput = document.querySelector('input');
 const cel = document.querySelector('.celcius');
 const farh = document.querySelector('.farhenheit');
 
+let city;
+
 // display
 
 const cardCity = document.querySelector('.card-city');
 
-root.appendChild(userInput());
 // root.appendChild(weatherCard());
 
 // Get weather data
 
-async function getData() {
-  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Nairobi&appid=49257f6591cfc3ed8daf0b5970d519cb`, 
+async function getData(city) {
+  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=49257f6591cfc3ed8daf0b5970d519cb`, 
     { mode: "cors" }
   );
 
@@ -149,9 +152,22 @@ const weatherCard = data => {
 
 }
 
-
-
-getData()
-  .then(dat => {
-    console.log(dat);
+// if (!form || form === null) {
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (isNaN(cityInput.value)) {
+      city = 'London';
+      console.log('six');
+    }
+    // city = cityInput.value;
+    getData(city);
+    console.log('seven');
   })
+// }
+
+
+
+// getData('Kampala')
+//   .then(dat => {
+//     console.log(dat);
+//   })
