@@ -10,7 +10,7 @@ const userInput = () => {
   form.classList.add('as', 'as');
 
   const cityInput = document.createElement('input');
-  cityInput.classList.add('w-48', 'h-10', 'rounded-lg', 'border-0', 'px-2', 'focus:outline-none');
+  cityInput.classList.add('w-48', 'h-10', 'rounded-lg', 'border-0', 'px-2', 'placeholder-blue-600');
   cityInput.placeholder = 'Enter City';
 
   const unit = document.createElement('div');

@@ -13,23 +13,14 @@ const cel = document.querySelector('.celcius');
 const farh = document.querySelector('.farhenheit');
 
 let city;
-let scale;
+let scale = false;
 let show;
 
 // display
 
 const cardCity = document.querySelector('.card-city');
 
-// root.appendChild(weatherCard());
-
 const validSearch = (city) => {
-  // if (data.cod === '404') {
-  //   alert(data.message);
-  //   console.log(data);
-  // } else {
-  //   weatherCard(data);
-    // console.log(data);
-  // }
   getData(city)
     .then(data => {
       if (data.cod !== '404') {
@@ -51,10 +42,6 @@ async function getData(city) {
   const data = await response.json();
 
   return data;
-
-  // validSearch(data); 
-  // console.log(data);
-  // weatherCard(data)
 }
 
 /*Get local time function */
@@ -73,8 +60,6 @@ const switchScale = data => {
   let temperature;
   let cScale = ' &#176;C';
   let fScale = ' &#176;F';
-  
-  scale = false;
 
   if (scale) {
     temperature = Math.round(data.main.temp - 273.15);
@@ -86,13 +71,7 @@ const switchScale = data => {
 
 }
 
-// ((data.main.temp - 273.15) * 9) / (5)) + 32
 const weatherCard = data => {
-  // let temperature = Math.round(
-  //   (
-  //     data.main.temp - 273.15
-  //   ));
-
   switchScale(data);
   
   const card = document.createElement('div');
@@ -118,7 +97,7 @@ const weatherCard = data => {
   const cardTempDiv = document.createElement('div'); // Temperature
 
   const cardTemp = document.createElement('h2');
-  cardTemp.classList.add('text-2xl', 'text-white');
+  cardTemp.classList.add('text-2xl', 'text-white', 'font-thin');
   cardTemp.innerHTML = `<h2>Temperature</h2>`;
 
   const temp = document.createElement('h2');
@@ -196,26 +175,41 @@ const weatherCard = data => {
 
 }
 
-// if (!form || form === null) {
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    if (isNaN(cityInput.value)) {
-      city = cityInput.value;
-      console.log('six');
-    }
-    cityInput.value = '';
-    
-    validSearch(city)
-    // getData(city);
-    console.log('seven');
-  })
-// }
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  if (isNaN(cityInput.value)) {
+    city = cityInput.value;
+    console.log('six');
+  }
+  cityInput.value = '';
+  
+  validSearch(city)
+  // getData(city);
+  console.log('seven');
+})
 
+cel.addEventListener('click', () => {
+  scale = true;
+  if (isNaN(cityInput.value)) {
+    city = cityInput.value;
+    console.log('six');
+  }
+  cityInput.value = '';
+  
+  validSearch(city)
+  // getData(city);
+  console.log('seven');
+})
 
-
-// if (cityInput.value === '') {
-//   getData('Kampala')
-//     .then(dat => {
-//       console.log(dat);
-//     });
-// }
+farh.addEventListener('click', () => {
+  scale = false;
+  if (isNaN(cityInput.value)) {
+    city = cityInput.value;
+    console.log('six');
+  }
+  cityInput.value = '';
+  
+  validSearch(city)
+  // getData(city);
+  console.log('seven');
+})
