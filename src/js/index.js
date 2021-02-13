@@ -13,7 +13,7 @@ const cel = document.querySelector('.celcius');
 const farh = document.querySelector('.farhenheit');
 
 let city;
-
+cityInput.value = null;
 // display
 
 const cardCity = document.querySelector('.card-city');
@@ -156,10 +156,11 @@ const weatherCard = data => {
   form.addEventListener('submit', e => {
     e.preventDefault();
     if (isNaN(cityInput.value)) {
-      city = 'London';
+      city = cityInput.value;
       console.log('six');
     }
-    // city = cityInput.value;
+    cityInput.value = '';
+    
     getData(city);
     console.log('seven');
   })
@@ -167,7 +168,9 @@ const weatherCard = data => {
 
 
 
-// getData('Kampala')
-//   .then(dat => {
-//     console.log(dat);
-//   })
+// if (cityInput.value === '') {
+//   getData('Kampala')
+//     .then(dat => {
+//       console.log(dat);
+//     });
+// }
