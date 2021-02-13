@@ -13,12 +13,32 @@ const cel = document.querySelector('.celcius');
 const farh = document.querySelector('.farhenheit');
 
 let city;
-cityInput.value = null;
+let scale = true;
+
 // display
 
 const cardCity = document.querySelector('.card-city');
 
 // root.appendChild(weatherCard());
+
+const validSearch = (city) => {
+  // if (data.cod === '404') {
+  //   alert(data.message);
+  //   console.log(data);
+  // } else {
+  //   weatherCard(data);
+    // console.log(data);
+  // }
+  getData(city)
+    .then(data => {
+      if (data.cod !== '404') {
+        weatherCard(data);
+        console.log(data);
+      } else {
+        alert(data.message);
+      }
+    });
+}
 
 // Get weather data
 
@@ -29,9 +49,11 @@ async function getData(city) {
 
   const data = await response.json();
 
-  // weatherCard(data);
-  console.log(data);
-  weatherCard(data)
+  return data;
+
+  // validSearch(data); 
+  // console.log(data);
+  // weatherCard(data)
 }
 
 /*Get local time function */
@@ -46,11 +68,22 @@ const getLocalTime = data => {
   return localTimeDate.toLocaleString();
 }
 
+const switchScale = data => {
+  let temperature;
+  let cScale = ' &#176;C';
+  if (scale) {
+    temperature = Math.round(data.main.temp - 273.15);
+    return temperature.toString().concat(cScale);
+  }
+
+}
+
+// ((data.main.temp - 273.15) * 9) / (5)) + 32
 const weatherCard = data => {
   let temperature = Math.round(
     (
-      ((data.main.temp - 273.15) * 9) / (5)) + 32
-    );
+      data.main.temp - 273.15
+    ));
   
   const card = document.createElement('div');
   card.classList.add('pt-6', 'flex', 'flex-row', 'content-center');
@@ -161,7 +194,8 @@ const weatherCard = data => {
     }
     cityInput.value = '';
     
-    getData(city);
+    validSearch(city)
+    // getData(city);
     console.log('seven');
   })
 // }
