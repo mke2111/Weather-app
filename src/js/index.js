@@ -12,6 +12,8 @@ const cityInput = document.querySelector('input');
 const cel = document.querySelector('.celcius');
 const farh = document.querySelector('.farhenheit');
 
+const card = document.createElement('div');
+
 let city;
 let scale = false;
 let show;
@@ -72,9 +74,9 @@ const switchScale = data => {
 }
 
 const weatherCard = data => {
+  card.innerHTML = '';
   switchScale(data);
   
-  const card = document.createElement('div');
   card.classList.add('pt-6', 'flex', 'flex-row', 'content-center');
 
   const cardContainer = document.createElement('div');
@@ -199,6 +201,7 @@ cel.addEventListener('click', () => {
   validSearch(city)
   // getData(city);
   console.log('seven');
+
 })
 
 farh.addEventListener('click', () => {
