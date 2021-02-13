@@ -13,7 +13,8 @@ const cel = document.querySelector('.celcius');
 const farh = document.querySelector('.farhenheit');
 
 let city;
-let scale = true;
+let scale;
+let show;
 
 // display
 
@@ -71,19 +72,28 @@ const getLocalTime = data => {
 const switchScale = data => {
   let temperature;
   let cScale = ' &#176;C';
+  let fScale = ' &#176;F';
+  
+  scale = false;
+
   if (scale) {
     temperature = Math.round(data.main.temp - 273.15);
-    return temperature.toString().concat(cScale);
+    show = temperature.toString().concat(cScale);
+  } else {
+    temperature = Math.round(((data.main.temp - 273.15) * 9) / (5)) + 32;
+    show = temperature.toString().concat(fScale);
   }
 
 }
 
 // ((data.main.temp - 273.15) * 9) / (5)) + 32
 const weatherCard = data => {
-  let temperature = Math.round(
-    (
-      data.main.temp - 273.15
-    ));
+  // let temperature = Math.round(
+  //   (
+  //     data.main.temp - 273.15
+  //   ));
+
+  switchScale(data);
   
   const card = document.createElement('div');
   card.classList.add('pt-6', 'flex', 'flex-row', 'content-center');
@@ -113,7 +123,8 @@ const weatherCard = data => {
 
   const temp = document.createElement('h2');
   temp.classList.add('text-3xl');
-  temp.innerHTML = `<h2>${temperature.toString()}&#176;C</h2>`;
+  // temp.innerHTML = `<h2>${temperature.toString()}&#176;C</h2>`;
+  temp.innerHTML = `<h2>${show}</h2>`;
 
   const cardHumDiv = document.createElement('div'); // Humidity
 
