@@ -20,14 +20,11 @@ let show;
 
 // display
 
-const cardCity = document.querySelector('.card-city');
-
 const validSearch = (city) => {
   getData(city)
     .then(data => {
       if (data.cod !== '404') {
         weatherCard(data);
-        console.log(data);
       } else {
         alert(data.message);
       }
@@ -42,7 +39,6 @@ async function getData(city) {
   );
 
   const data = await response.json();
-
   return data;
 }
 
@@ -104,7 +100,6 @@ const weatherCard = data => {
 
   const temp = document.createElement('h2');
   temp.classList.add('text-3xl');
-  // temp.innerHTML = `<h2>${temperature.toString()}&#176;C</h2>`;
   temp.innerHTML = `<h2>${show}</h2>`;
 
   const cardHumDiv = document.createElement('div'); // Humidity
@@ -172,47 +167,39 @@ const weatherCard = data => {
   cardContainer.appendChild(cardInfo);
   card.appendChild(cardContainer);
   root.appendChild(card);
+}
 
-  // return card;
+const passInput = () => {
+  if (isNaN(cityInput.value)) {
+    city = cityInput.value;
+  }
+  cityInput.value = '';
+  validSearch(city);
+}
 
+const activeScale = () => {
+  if (scale) {
+    farh.classList.remove('bg-purple-600');
+    cel.classList.add('bg-purple-600');
+  } else {
+    cel.classList.remove('bg-purple-600');
+    farh.classList.add('bg-purple-600');
+  }
 }
 
 form.addEventListener('submit', e => {
   e.preventDefault();
-  if (isNaN(cityInput.value)) {
-    city = cityInput.value;
-    console.log('six');
-  }
-  cityInput.value = '';
-  
-  validSearch(city)
-  // getData(city);
-  console.log('seven');
+  passInput();
 })
 
 cel.addEventListener('click', () => {
   scale = true;
-  if (isNaN(cityInput.value)) {
-    city = cityInput.value;
-    console.log('six');
-  }
-  cityInput.value = '';
-  
-  validSearch(city)
-  // getData(city);
-  console.log('seven');
-
+  passInput();
+  activeScale();
 })
 
 farh.addEventListener('click', () => {
   scale = false;
-  if (isNaN(cityInput.value)) {
-    city = cityInput.value;
-    console.log('six');
-  }
-  cityInput.value = '';
-  
-  validSearch(city)
-  // getData(city);
-  console.log('seven');
+  passInput();
+  activeScale();
 })

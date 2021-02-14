@@ -14,12 +14,12 @@ const userInput = () => {
   cityInput.placeholder = 'Enter City';
 
   const unit = document.createElement('div');
-  unit.classList.add('unit', 'text-white', 'text-3xl', 'bg-purple-400', 'px-2', 'rounded-lg', 'flex');
+  unit.classList.add('unit', 'text-white', 'text-3xl', 'bg-purple-400', 'flex', 'rounded-lg');
   const cel = document.createElement('button');
-  cel.classList.add('bg-purple-400', 'border-r', 'border-gray-800', 'px-2', 'celcius');
+  cel.classList.add('border-r', 'border-gray-800', 'px-2', 'celcius', 'rounded-l-lg');
   cel.innerText = 'C';
   const farh = document.createElement('button');
-  farh.classList.add('bg-purple-400', 'px-2', 'farhenheit');
+  farh.classList.add('px-2', 'farhenheit', 'rounded-r-lg');
   farh.innerText = 'F';
 
   unit.appendChild(cel);
@@ -32,40 +32,5 @@ const userInput = () => {
 
   return formContainer;
 }
-
-// const weatherCard = data => {
-//   const card = document.createElement('div');
-//   card.classList.add('pt-6');
-
-//   const cardContainer = document.createElement('div');
-//   cardContainer.classList.add('border', 'border-red-400', 'rounded-lg', 'p-4', 'w-min');
-
-//   const cardCity = document.createElement('h2');
-//   cardCity.classList.add('text-4xl', 'text-blue-900', 'card-city');
-//   // if (data === undefined) {
-//   //   cardCity.innerText = `${data.name}`;
-//   // }
-  
-//   const cardTemp = document.createElement('h2');
-//   cardTemp.classList.add();
-//   cardTemp.innerHTML = `<h2>Temp:   21&#176;C</h2>`;
-
-//   const cardIcon = document.createElement('h2');
-//   cardIcon.classList.add();
-//   cardIcon.innerHTML = `<img src=''>`;
-
-//   const cardCloud = document.createElement('h2');
-//   cardCloud.classList.add();
-//   cardCloud.innerText = `Rainy`;
-
-//   cardContainer.appendChild(cardCity);
-//   cardContainer.appendChild(cardTemp);
-//   cardContainer.appendChild(cardIcon);
-//   cardContainer.appendChild(cardCloud);
-//   card.appendChild(cardContainer);
-
-//   return card;
-
-// }
 
 export default userInput ;
