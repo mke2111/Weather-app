@@ -4,7 +4,7 @@ const userInput = () => {
 
   const head = document.createElement('div');
   head.classList.add('text-white', 'text-4xl');
-  head.innerHTML = '<h1>Weather App</h1>'
+  head.innerHTML = '<h1>Weather App</h1>';
 
   const form = document.createElement('form');
   form.classList.add('as', 'as');
@@ -31,6 +31,6 @@ const userInput = () => {
   formContainer.appendChild(unit);
 
   return formContainer;
-}
+};
 
-export default userInput ;
+export default userInput;

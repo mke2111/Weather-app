@@ -13,7 +13,7 @@ const cel = document.querySelector('.celcius');
 const farh = document.querySelector('.farhenheit');
 
 const card = document.createElement('div');
-var modal = document.getElementById("myModal");
+const modal = document.getElementById('myModal');
 
 let city;
 let scale = false;
@@ -22,55 +22,41 @@ let show;
 // modal
 
 const modalWarn = () => {
-  modal.style.display = "block";
+  modal.style.display = 'block';
 
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
+  window.onclick = function (event) {
+    if (event.target === modal) {
+      modal.style.display = 'none';
     }
-  }
-}
-
-// display
-
-const validSearch = (city) => {
-  getData(city)
-    .then(data => {
-      if (data.cod !== '404') {
-        weatherCard(data);
-      } else {
-        modalWarn();
-      }
-    });
-}
+  };
+};
 
 // Get weather data
 
 async function getData(city) {
-  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=49257f6591cfc3ed8daf0b5970d519cb`, 
-    { mode: "cors" }
-  );
+  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=49257f6591cfc3ed8daf0b5970d519cb`,
+    { mode: 'cors' });
 
   const data = await response.json();
   return data;
 }
 
-/*Get local time function */
+// Get local time function
 
 const getLocalTime = data => {
-  let date = new Date();
-  let time = date.getTime();
-  let localOffset = date.getTimezoneOffset() * 60000;
-  let utc = time + localOffset;
-  let localTime = utc + 1000 * data.timezone;
-  let localTimeDate = new Date(localTime);
+  const date = new Date();
+  const time = date.getTime();
+  const localOffset = date.getTimezoneOffset() * 60000;
+  const utc = time + localOffset;
+  const localTime = utc + 1000 * data.timezone;
+  const localTimeDate = new Date(localTime);
   return localTimeDate.toLocaleString();
-}
+};
 
 const switchScale = data => {
   let temperature;
-  let cScale = ' &#176;C';
-  let fScale = ' &#176;F';
+  const cScale = ' &#176;C';
+  const fScale = ' &#176;F';
 
   if (scale) {
     temperature = Math.round(data.main.temp - 273.15);
@@ -79,12 +65,12 @@ const switchScale = data => {
     temperature = Math.round(((data.main.temp - 273.15) * 9) / (5)) + 32;
     show = temperature.toString().concat(fScale);
   }
-}
+};
 
 const weatherCard = data => {
   card.innerHTML = '';
   switchScale(data);
-  
+
   card.classList.add('pt-6', 'flex', 'flex-row', 'content-center');
 
   const cardContainer = document.createElement('div');
@@ -99,16 +85,16 @@ const weatherCard = data => {
   const cardCity = document.createElement('h2');
   cardCity.classList.add('text-4xl', 'text-blue-900', 'card-city');
   cardCity.innerText = `${data.name}, ${data.sys.country}`;
-  
+
   // City properties container
   const cardInfo = document.createElement('div');
   cardInfo.classList.add('flex', 'justify-around', 'pt-6');
-  
+
   const cardTempDiv = document.createElement('div'); // Temperature
 
   const cardTemp = document.createElement('h2');
   cardTemp.classList.add('text-2xl', 'text-white', 'font-thin');
-  cardTemp.innerHTML = `<h2>Temperature</h2>`;
+  cardTemp.innerHTML = '<h2>Temperature</h2>';
 
   const temp = document.createElement('h2');
   temp.classList.add('text-3xl');
@@ -118,7 +104,7 @@ const weatherCard = data => {
 
   const cardHum = document.createElement('h2');
   cardHum.classList.add('text-2xl', 'text-white');
-  cardHum.innerHTML = `<h2>Humidity</h2>`;
+  cardHum.innerHTML = '<h2>Humidity</h2>';
 
   const humi = document.createElement('h2');
   humi.classList.add('text-3xl');
@@ -128,7 +114,7 @@ const weatherCard = data => {
 
   const cardPressure = document.createElement('h2');
   cardPressure.classList.add('text-2xl', 'text-white');
-  cardPressure.innerHTML = `<h2>Pressure</h2>`;
+  cardPressure.innerHTML = '<h2>Pressure</h2>';
 
   const pressure = document.createElement('h2');
   pressure.classList.add('text-3xl');
@@ -138,7 +124,7 @@ const weatherCard = data => {
 
   const cardIcon = document.createElement('h2');
   cardIcon.classList.add('text-2xl', 'text-white');
-  cardIcon.innerHTML = `Wind Speed`;
+  cardIcon.innerHTML = 'Wind Speed';
 
   const speed = document.createElement('h2');
   speed.classList.add('text-3xl');
@@ -148,11 +134,11 @@ const weatherCard = data => {
 
   const cardCloud = document.createElement('h2');
   cardCloud.classList.add('text-2xl', 'text-white');
-  cardCloud.innerText = `Cloud description`;
+  cardCloud.innerText = 'Cloud description';
 
   const cloud = document.createElement('h2');
   cloud.classList.add('text-3xl');
-  cloud.innerText = `${data.weather[0]['description']}`;
+  cloud.innerText = `${data.weather[0].description}`;
 
   cardTempDiv.appendChild(cardTemp);
   cardTempDiv.appendChild(temp);
@@ -179,15 +165,26 @@ const weatherCard = data => {
   cardContainer.appendChild(cardInfo);
   card.appendChild(cardContainer);
   root.appendChild(card);
-}
+};
+
+const validSearch = (city) => {
+  getData(city)
+    .then(data => {
+      if (data.cod !== '404') {
+        weatherCard(data);
+      } else {
+        modalWarn();
+      }
+    });
+};
 
 const passInput = () => {
-  if (isNaN(cityInput.value)) {
+  if (Number.isNaN(cityInput.value)) {
     city = cityInput.value;
   }
   cityInput.value = '';
   validSearch(city);
-}
+};
 
 const activeScale = () => {
   if (scale) {
@@ -197,21 +194,21 @@ const activeScale = () => {
     cel.classList.remove('bg-pink-600');
     farh.classList.add('bg-pink-600');
   }
-}
+};
 
 form.addEventListener('submit', e => {
   e.preventDefault();
   passInput();
-})
+});
 
 cel.addEventListener('click', () => {
   scale = true;
   passInput();
   activeScale();
-})
+});
 
 farh.addEventListener('click', () => {
   scale = false;
   passInput();
   activeScale();
-})
+});
