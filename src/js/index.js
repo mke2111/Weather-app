@@ -1,7 +1,7 @@
 import userInput from './content';
 
 const root = document.getElementById('root');
-root.classList.add('bg-gradient-to-r', 'to-red-500', 'via-pink-500', 'from-purple-400', 'h-screen', 'w-full', 'opacity-95', 'z-10');
+root.classList.add('bg-gradient-to-r', 'to-purple-600', 'via-blue-400', 'from-purple-400', 'h-screen', 'w-full', 'opacity-95', 'z-10');
 
 root.appendChild(userInput());
 
@@ -88,7 +88,7 @@ const weatherCard = data => {
   card.classList.add('pt-6', 'flex', 'flex-row', 'content-center');
 
   const cardContainer = document.createElement('div');
-  cardContainer.classList.add('border', 'border-red-400', 'rounded-lg', 'p-4', 'w-5/6', 'mx-auto', 'px-auto', 'text-center');
+  cardContainer.classList.add('p-4', 'w-5/6', 'mx-auto', 'px-auto', 'text-center');
 
   // City time
   const cardTime = document.createElement('h2');
@@ -191,11 +191,11 @@ const passInput = () => {
 
 const activeScale = () => {
   if (scale) {
-    farh.classList.remove('bg-purple-600');
-    cel.classList.add('bg-purple-600');
+    farh.classList.remove('bg-pink-600');
+    cel.classList.add('bg-pink-600');
   } else {
-    cel.classList.remove('bg-purple-600');
-    farh.classList.add('bg-purple-600');
+    cel.classList.remove('bg-pink-600');
+    farh.classList.add('bg-pink-600');
   }
 }
 
