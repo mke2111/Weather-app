@@ -1,4 +1,4 @@
-import userInput from './content'
+import userInput from './content';
 
 const root = document.getElementById('root');
 root.classList.add('bg-gradient-to-r', 'to-red-500', 'via-pink-500', 'from-purple-400', 'h-screen', 'w-full', 'opacity-95', 'z-10');
@@ -13,10 +13,23 @@ const cel = document.querySelector('.celcius');
 const farh = document.querySelector('.farhenheit');
 
 const card = document.createElement('div');
+var modal = document.getElementById("myModal");
 
 let city;
 let scale = false;
 let show;
+
+// modal
+
+const modalWarn = () => {
+  modal.style.display = "block";
+
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+}
 
 // display
 
@@ -26,7 +39,7 @@ const validSearch = (city) => {
       if (data.cod !== '404') {
         weatherCard(data);
       } else {
-        alert(data.message);
+        modalWarn();
       }
     });
 }
@@ -66,7 +79,6 @@ const switchScale = data => {
     temperature = Math.round(((data.main.temp - 273.15) * 9) / (5)) + 32;
     show = temperature.toString().concat(fScale);
   }
-
 }
 
 const weatherCard = data => {
