@@ -179,7 +179,7 @@ const validSearch = (city) => {
 };
 
 const passInput = () => {
-  if (Number.isNaN(cityInput.value)) {
+  if (Number.isNaN(Number(cityInput.value))) {
     city = cityInput.value;
   }
   cityInput.value = '';
