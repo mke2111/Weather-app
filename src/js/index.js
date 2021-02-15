@@ -92,7 +92,7 @@ const background = data => {
     default:
       break;
   }
-}
+};
 
 const tempScale = data => {
   if (scale) {
@@ -102,7 +102,7 @@ const tempScale = data => {
     temperature = Math.round(((data.main.temp - 273.15) * 9) / (5)) + 32;
     show = temperature.toString().concat(fScale);
   }
-}
+};
 
 const validSearch = (city) => {
   getData(city)
@@ -125,7 +125,7 @@ const validSearch = (city) => {
       if (error.cod === '404') {
         modalWarn();
       }
-    })
+    });
 };
 
 const passInput = () => {
