@@ -33,7 +33,7 @@ To get a local copy up and running follow these simple example steps.
 In the terminal, Run the following commands.
 
 - `git clone https://github.com/mke2111/Weather-app.git`
-- `cd to-do-list`
+- `cd Weather-app`
 
 OR
 
