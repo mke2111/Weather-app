@@ -50,13 +50,13 @@ const modalWarn = () => {
 
 // Get weather data
 
-async function getData(city) {
+const getData = async city => {
   const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=49257f6591cfc3ed8daf0b5970d519cb`,
     { mode: 'cors' });
 
   const data = await response.json();
   return data;
-}
+};
 
 // Get local time function
 
@@ -104,7 +104,7 @@ const tempScale = data => {
   }
 };
 
-const validSearch = (city) => {
+const validSearch = city => {
   getData(city)
     .then(data => {
       if (data.cod !== '404') {
