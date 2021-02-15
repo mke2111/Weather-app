@@ -1,9 +1,11 @@
-import userInput from './content';
+// import switchScale from './apii';
+import { userInput, weatherCard } from './content';
 
 const root = document.getElementById('root');
 root.classList.add('bg-gradient-to-r', 'to-purple-600', 'via-blue-400', 'from-purple-400', 'h-screen', 'w-full', 'opacity-95', 'z-10');
 
 root.appendChild(userInput());
+weatherCard();
 
 // user input section
 
@@ -12,12 +14,25 @@ const cityInput = document.querySelector('input');
 const cel = document.querySelector('.celcius');
 const farh = document.querySelector('.farhenheit');
 
-const card = document.createElement('div');
 const modal = document.getElementById('myModal');
+
+// weather fields
+
+const cardTime = document.querySelector('.card-time');
+const cardCity = document.querySelector('.card-city');
+const cardTemp = document.querySelector('.card-temp');
+const cardHumi = document.querySelector('.humidity');
+const cardPress = document.querySelector('.pressure');
+const cardSpeed = document.querySelector('.speed');
+const cardDesc = document.querySelector('.description');
 
 let city;
 let scale = false;
 let show;
+let timee;
+const cScale = ' &#176;C';
+const fScale = ' &#176;F';
+  let temperature;
 
 // modal
 
@@ -53,125 +68,38 @@ const getLocalTime = data => {
   return localTimeDate.toLocaleString();
 };
 
-const switchScale = data => {
-  let temperature;
-  const cScale = ' &#176;C';
-  const fScale = ' &#176;F';
+// const switchScale = data => {
+//   const cScale = ' &#176;C';
+//   const fScale = ' &#176;F';
 
-  if (scale) {
-    temperature = Math.round(data.main.temp - 273.15);
-    show = temperature.toString().concat(cScale);
-  } else {
-    temperature = Math.round(((data.main.temp - 273.15) * 9) / (5)) + 32;
-    show = temperature.toString().concat(fScale);
-  }
-};
-
-const weatherCard = data => {
-  card.innerHTML = '';
-  switchScale(data);
-
-  card.classList.add('pt-6', 'flex', 'flex-row', 'content-center');
-
-  const cardContainer = document.createElement('div');
-  cardContainer.classList.add('p-4', 'w-5/6', 'mx-auto', 'px-auto', 'text-center');
-
-  // City time
-  const cardTime = document.createElement('h2');
-  cardTime.classList.add('text-2xl', 'text-white');
-  cardTime.innerHTML = getLocalTime(data);
-
-  // City Name
-  const cardCity = document.createElement('h2');
-  cardCity.classList.add('text-4xl', 'text-blue-900', 'card-city');
-  cardCity.innerText = `${data.name}, ${data.sys.country}`;
-
-  // City properties container
-  const cardInfo = document.createElement('div');
-  cardInfo.classList.add('flex', 'justify-around', 'pt-6');
-
-  const cardTempDiv = document.createElement('div'); // Temperature
-
-  const cardTemp = document.createElement('h2');
-  cardTemp.classList.add('text-2xl', 'text-white', 'font-thin');
-  cardTemp.innerHTML = '<h2>Temperature</h2>';
-
-  const temp = document.createElement('h2');
-  temp.classList.add('text-3xl');
-  temp.innerHTML = `<h2>${show}</h2>`;
-
-  const cardHumDiv = document.createElement('div'); // Humidity
-
-  const cardHum = document.createElement('h2');
-  cardHum.classList.add('text-2xl', 'text-white');
-  cardHum.innerHTML = '<h2>Humidity</h2>';
-
-  const humi = document.createElement('h2');
-  humi.classList.add('text-3xl');
-  humi.innerHTML = `<h2>${data.main.humidity}</h2>`;
-
-  const cardPreDiv = document.createElement('div'); // Pressure
-
-  const cardPressure = document.createElement('h2');
-  cardPressure.classList.add('text-2xl', 'text-white');
-  cardPressure.innerHTML = '<h2>Pressure</h2>';
-
-  const pressure = document.createElement('h2');
-  pressure.classList.add('text-3xl');
-  pressure.innerHTML = `<h2>${data.main.pressure}</h2>`;
-
-  const cardIconDiv = document.createElement('div'); // Wind speed
-
-  const cardIcon = document.createElement('h2');
-  cardIcon.classList.add('text-2xl', 'text-white');
-  cardIcon.innerHTML = 'Wind Speed';
-
-  const speed = document.createElement('h2');
-  speed.classList.add('text-3xl');
-  speed.innerHTML = `${data.wind.speed} M/H`;
-
-  const cardCloudDiv = document.createElement('div'); // Description
-
-  const cardCloud = document.createElement('h2');
-  cardCloud.classList.add('text-2xl', 'text-white');
-  cardCloud.innerText = 'Cloud description';
-
-  const cloud = document.createElement('h2');
-  cloud.classList.add('text-3xl');
-  cloud.innerText = `${data.weather[0].description}`;
-
-  cardTempDiv.appendChild(cardTemp);
-  cardTempDiv.appendChild(temp);
-
-  cardHumDiv.appendChild(cardHum);
-  cardHumDiv.appendChild(humi);
-
-  cardPreDiv.appendChild(cardPressure);
-  cardPreDiv.appendChild(pressure);
-
-  cardIconDiv.appendChild(cardIcon);
-  cardIconDiv.appendChild(speed);
-
-  cardCloudDiv.appendChild(cardCloud);
-  cardCloudDiv.appendChild(cloud);
-
-  cardContainer.appendChild(cardTime);
-  cardContainer.appendChild(cardCity);
-  cardInfo.appendChild(cardTempDiv);
-  cardInfo.appendChild(cardHumDiv);
-  cardInfo.appendChild(cardPreDiv);
-  cardInfo.appendChild(cardIconDiv);
-  cardInfo.appendChild(cardCloudDiv);
-  cardContainer.appendChild(cardInfo);
-  card.appendChild(cardContainer);
-  root.appendChild(card);
-};
+//   if (scale) {
+//     temperature = Math.round(data.main.temp - 273.15);
+//     show = temperature.toString().concat(cScale);
+//   } else {
+//     temperature = Math.round(((data.main.temp - 273.15) * 9) / (5)) + 32;
+//     show = temperature.toString().concat(fScale);
+//   }
+//   return show
+// };
 
 const validSearch = (city) => {
   getData(city)
     .then(data => {
+      if (scale) {
+        temperature = Math.round(data.main.temp - 273.15);
+        show = temperature.toString().concat(cScale);
+      } else {
+        temperature = Math.round(((data.main.temp - 273.15) * 9) / (5)) + 32;
+        show = temperature.toString().concat(fScale);
+      }
       if (data.cod !== '404') {
-        weatherCard(data);
+        cardCity.innerHTML = `<h2>${data.name}, ${data.sys.country}</h2>`;
+        cardTime.innerHTML = `<h2>${getLocalTime(data)}</h2>`;
+        cardTemp.innerHTML = `<h2>${show}</h2>`;
+        cardSpeed.innerHTML = `<h2>${data.wind.speed} M/H</h2>`;
+        cardPress.innerHTML = `<h2>${data.main.pressure}</h2>`;
+        cardHumi.innerHTML = `<h2>${data.main.humidity}</h2>`;
+        cardDesc.innerHTML = `<h2>${data.weather[0].description}</h2>`;
       } else {
         modalWarn();
       }
