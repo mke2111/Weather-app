@@ -15,7 +15,7 @@
 
 ## Live Demo
 
-[Live Demo](https://rawcdn.githack.com/mke2111/Weather-app/d31fee417c109061ed9a74a8c756ac8eda180d5c/dist/index.html)
+[Live Demo](https://rawcdn.githack.com/mke2111/Weather-app/1053e34bf766a7758d77d2c144ebf155baff387e/dist/index.html)
 
 
 ## Getting Started
