@@ -1,6 +1,3 @@
-// import switchScale from './apii';
-// import swiitchScale from './apii';
-
 const userInput = () => {
   const formContainer = document.createElement('div');
   formContainer.classList.add('flex', 'justify-around', 'pt-8');
@@ -38,12 +35,6 @@ const userInput = () => {
 
 const weatherCard = () => {
   const root = document.querySelector('#root');
-  // const { main } = data
-  // card.innerHTML = '';
-  // let show;
-
-  // switchScale(data);
-  
 
   const card = document.createElement('div');
   card.classList.add('pt-6', 'flex', 'flex-row', 'content-center');
@@ -53,13 +44,11 @@ const weatherCard = () => {
 
   // City time
   const cardTime = document.createElement('h2');
-  cardTime.classList.add('text-2xl', 'text-white', 'card-time');
-  // cardTime.innerHTML = `<h2>${getLocalTime(data)}</h2>`;
+  cardTime.classList.add('text-2xl', 'text-yellow-500', 'card-time');
 
   // City Name
   const cardCity = document.createElement('h2');
   cardCity.classList.add('text-4xl', 'text-blue-900', 'card-city');
-  // cardCity.innerText = `${data.name}, ${data.sys.country}`;
 
   // City properties container
   const cardInfo = document.createElement('div');
@@ -68,52 +57,47 @@ const weatherCard = () => {
   const cardTempDiv = document.createElement('div'); // Temperature
 
   const cardTemp = document.createElement('h2');
-  cardTemp.classList.add('text-2xl', 'text-white', 'font-thin');
+  cardTemp.classList.add('text-2xl', 'text-yellow-500', 'font-thin');
   cardTemp.innerHTML = '<h2>Temperature</h2>';
 
   const temp = document.createElement('h2');
   temp.classList.add('text-3xl', 'card-temp');
-  // temp.innerHTML = `<h2>${Math.round(data.main.temp - 273.15)}  &#176;C</h2>`;
 
   const cardHumDiv = document.createElement('div'); // Humidity
 
   const cardHum = document.createElement('h2');
-  cardHum.classList.add('text-2xl', 'text-white');
+  cardHum.classList.add('text-2xl', 'text-yellow-500');
   cardHum.innerHTML = '<h2>Humidity</h2>';
 
   const humi = document.createElement('h2');
   humi.classList.add('text-3xl', 'humidity');
-  // humi.innerHTML = `<h2>${data.main.humidity}</h2>`;
 
   const cardPreDiv = document.createElement('div'); // Pressure
 
   const cardPressure = document.createElement('h2');
-  cardPressure.classList.add('text-2xl', 'text-white');
+  cardPressure.classList.add('text-2xl', 'text-yellow-500');
   cardPressure.innerHTML = '<h2>Pressure</h2>';
 
   const pressure = document.createElement('h2');
   pressure.classList.add('text-3xl', 'pressure');
-  // pressure.innerHTML = `<h2>${data.main.pressure}</h2>`;
 
   const cardIconDiv = document.createElement('div'); // Wind speed
 
   const cardIcon = document.createElement('h2');
-  cardIcon.classList.add('text-2xl', 'text-white');
+  cardIcon.classList.add('text-2xl', 'text-yellow-500');
   cardIcon.innerHTML = 'Wind Speed';
 
   const speed = document.createElement('h2');
   speed.classList.add('text-3xl', 'speed');
-  // speed.innerHTML = `${data.wind.speed} M/H`;
 
   const cardCloudDiv = document.createElement('div'); // Description
 
   const cardCloud = document.createElement('h2');
-  cardCloud.classList.add('text-2xl', 'text-white');
+  cardCloud.classList.add('text-2xl', 'text-yellow-500');
   cardCloud.innerText = 'Cloud description';
 
   const cloud = document.createElement('h2');
   cloud.classList.add('text-3xl', 'description');
-  // cloud.innerText = `${data.weather[0].description}`;
 
   cardTempDiv.appendChild(cardTemp);
   cardTempDiv.appendChild(temp);

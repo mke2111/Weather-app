@@ -2,15 +2,14 @@ import { userInput, weatherCard } from './content';
 
 const root = document.getElementById('root');
 const body = document.querySelector('body');
-body.classList.add('z-10', 'bg-center', 'bg-cover', 'bg-no-repeat');
-root.classList.add('h-screen', 'w-full', 'opacity-95', 'z-40');
-body.style.filter = 'brightness(20%)';
-body.style.backgroundImage = 'url("images/main-background.jpg")';
 
+body.classList.add('bg-center', 'bg-cover', 'bg-no-repeat');
+root.classList.add('h-screen', 'w-full', 'opacity-95');
+body.style.backgroundImage = 'url("images/main-background.jpg")';
 
 root.appendChild(userInput());
 weatherCard();
-// 'bg-gradient-to-r', 'to-purple-600', 'via-blue-400', 'from-purple-400', 
+
 // user input section
 
 const form = document.querySelector('form');
@@ -35,7 +34,7 @@ let scale = false;
 let show;
 const cScale = ' &#176;C';
 const fScale = ' &#176;F';
-  let temperature;
+let temperature;
 
 // modal
 
@@ -95,18 +94,22 @@ const background = data => {
   }
 }
 
+const tempScale = data => {
+  if (scale) {
+    temperature = Math.round(data.main.temp - 273.15);
+    show = temperature.toString().concat(cScale);
+  } else {
+    temperature = Math.round(((data.main.temp - 273.15) * 9) / (5)) + 32;
+    show = temperature.toString().concat(fScale);
+  }
+}
+
 const validSearch = (city) => {
   getData(city)
     .then(data => {
-      if (scale) {
-        temperature = Math.round(data.main.temp - 273.15);
-        show = temperature.toString().concat(cScale);
-      } else {
-        temperature = Math.round(((data.main.temp - 273.15) * 9) / (5)) + 32;
-        show = temperature.toString().concat(fScale);
-      }
       if (data.cod !== '404') {
         background(data);
+        tempScale(data);
         cardCity.innerHTML = `<h2>${data.name}, ${data.sys.country}</h2>`;
         cardTime.innerHTML = `<h2>${getLocalTime(data)}</h2>`;
         cardTemp.innerHTML = `<h2>${show}</h2>`;
@@ -114,10 +117,15 @@ const validSearch = (city) => {
         cardPress.innerHTML = `<h2>${data.main.pressure}</h2>`;
         cardHumi.innerHTML = `<h2>${data.main.humidity}</h2>`;
         cardDesc.innerHTML = `<h2>${data.weather[0].description}</h2>`;
-      } else {
+      } else if (data.cod === '404') {
         modalWarn();
       }
-    });
+    })
+    .catch(error => {
+      if (error.cod === '404') {
+        modalWarn();
+      }
+    })
 };
 
 const passInput = () => {
@@ -154,5 +162,3 @@ farh.addEventListener('click', () => {
   passInput();
   activeScale();
 });
-
-// passInput('Kampala');
