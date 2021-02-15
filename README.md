@@ -41,7 +41,7 @@ OR
 
 **STEP 2**
 
-- Run `npm install` to download all dependencies for the To-do list project.
+- Run `npm install` to download all dependencies for the project.
 
 **STEP 3**
 
@@ -50,7 +50,7 @@ OR
 **STEP 4**
 
 - Then open the `index.html` file using a browser.
-- Enjoy the simple To-do List.
+- Enjoy the simple Weather app.
 
 ## Author
 
