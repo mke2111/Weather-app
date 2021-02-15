@@ -1,12 +1,16 @@
-// import switchScale from './apii';
 import { userInput, weatherCard } from './content';
 
 const root = document.getElementById('root');
-root.classList.add('bg-gradient-to-r', 'to-purple-600', 'via-blue-400', 'from-purple-400', 'h-screen', 'w-full', 'opacity-95', 'z-10');
+const body = document.querySelector('body');
+body.classList.add('z-10', 'bg-center', 'bg-cover', 'bg-no-repeat');
+root.classList.add('h-screen', 'w-full', 'opacity-95', 'z-40');
+body.style.filter = 'brightness(20%)';
+body.style.backgroundImage = 'url("images/main-background.jpg")';
+
 
 root.appendChild(userInput());
 weatherCard();
-
+// 'bg-gradient-to-r', 'to-purple-600', 'via-blue-400', 'from-purple-400', 
 // user input section
 
 const form = document.querySelector('form');
@@ -29,7 +33,6 @@ const cardDesc = document.querySelector('.description');
 let city;
 let scale = false;
 let show;
-let timee;
 const cScale = ' &#176;C';
 const fScale = ' &#176;F';
   let temperature;
@@ -68,19 +71,29 @@ const getLocalTime = data => {
   return localTimeDate.toLocaleString();
 };
 
-// const switchScale = data => {
-//   const cScale = ' &#176;C';
-//   const fScale = ' &#176;F';
-
-//   if (scale) {
-//     temperature = Math.round(data.main.temp - 273.15);
-//     show = temperature.toString().concat(cScale);
-//   } else {
-//     temperature = Math.round(((data.main.temp - 273.15) * 9) / (5)) + 32;
-//     show = temperature.toString().concat(fScale);
-//   }
-//   return show
-// };
+const background = data => {
+  switch (data.weather[0].main) {
+    case 'Clear':
+      body.style.backgroundImage = 'url("images/clear.jpg")';
+      break;
+    case 'Clouds':
+      body.style.backgroundImage = 'url("images/cloudy.jpg")';
+      break;
+    case 'Rain':
+    case 'Drizzle':
+    case 'Mist':
+      body.style.backgroundImage = 'url("images/rain.jpg")';
+      break;
+    case 'Thunderstorm':
+      body.style.backgroundImage = 'url("images/thunderstorm.jpg")';
+      break;
+    case 'Snow':
+      body.style.backgroundImage = 'url("images/snow.jpg")';
+      break;
+    default:
+      break;
+  }
+}
 
 const validSearch = (city) => {
   getData(city)
@@ -93,6 +106,7 @@ const validSearch = (city) => {
         show = temperature.toString().concat(fScale);
       }
       if (data.cod !== '404') {
+        background(data);
         cardCity.innerHTML = `<h2>${data.name}, ${data.sys.country}</h2>`;
         cardTime.innerHTML = `<h2>${getLocalTime(data)}</h2>`;
         cardTemp.innerHTML = `<h2>${show}</h2>`;
@@ -140,3 +154,5 @@ farh.addEventListener('click', () => {
   passInput();
   activeScale();
 });
+
+// passInput('Kampala');
